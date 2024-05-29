@@ -80,7 +80,7 @@ export class CartComponent implements OnInit, AfterViewInit {
       
     }).subscribe((data:any)=>{
       
-      console.log("sss", data);
+   
       
     })
 
