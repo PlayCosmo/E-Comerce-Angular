@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center">
+    <h2 class="text-center mb-5">Personal Space</h2>
+    <button class="btn btn-danger" (click)="quit()">Quit</button>
+  </div>
+
+  <section *ngIf="userInfo" class="d-flex gap-3">
+    <div class="card w-25 mb-5" style="width: 300px;">
+      <img [src]="userInfo.avatar" class="card-img-top" alt="User Avatar">
+    </div>
+    <div class="w-25 mt-5">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{userInfo.firstName}} {{userInfo.lastName}}</li>
+        <li class="list-group-item">Address: {{userInfo.address}}</li>
+        <li class="list-group-item">Email: {{userInfo.email}}</li>
+        <li class="list-group-item">Phone: {{userInfo.phone}}</li>
+        <li class="list-group-item">Zipcode: {{userInfo.zipcode}}</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="form-section">
+    <button class="btn btn-primary" (click)="switchForm('emailVerification')">Email Verification</button>
+    <button class="btn btn-warning" (click)="switchForm('emailRecovery')">Email Recovery</button>
+    <button class="btn btn-success" (click)="switchForm('changePassword')">Change Password</button>
+    <button class="btn btn-info" (click)="switchForm('updateInfo')">Update Info</button>
+    <button class="btn btn-secondary" (click)="switchForm('addProduct')">Add Product</button>
+
+    <div [ngSwitch]="currentForm">
+      <div *ngSwitchCase="'emailVerification'">
+        <h4>Email Verification</h4>
+        <form [formGroup]="newForm" (ngSubmit)="verificationEmail()">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="Enter your email">
+          </div>
+          <button class="btn btn-primary" type="submit">Verify Email</button>
+        </form>
+      </div>
+
+      <div *ngSwitchCase="'emailRecovery'">
+        <h4>Email Recovery</h4>
+        <form [formGroup]="newForm1" (ngSubmit)="emailRecovery()">
+          <div class="form-group">
+            <label for="emailRecovery">Email</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="Enter your email">
+          </div>
+          <button class="btn btn-warning" type="submit">Email Recovery</button>
+        </form>
+      </div>
+
+      <div *ngSwitchCase="'changePassword'">
+        <h4>Change Password</h4>
+        <form [formGroup]="newForm2" (ngSubmit)="changePassword()">
+          <div class="form-group">
+            <label for="oldPassword">Old Password</label>
+            <input type="password" class="form-control" formControlName="oldPassword" placeholder="Old password">
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input type="password" class="form-control" formControlName="newPassword" placeholder="New password">
+          </div>
+          <button class="btn btn-success" type="submit">Change Password</button>
+        </form>
+      </div>
+
+      <div *ngSwitchCase="'updateInfo'">
+        <h4>Update Info</h4>
+        <form [formGroup]="newForm3" (ngSubmit)="updateInfo()">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" formControlName="firstName" placeholder="First Name">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name">
+          </div>
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input type="text" class="form-control" formControlName="age" placeholder="Age">
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" formControlName="address" placeholder="Address">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" formControlName="phone" placeholder="Phone">
+          </div>
+          <div class="form-group">
+            <label for="zipcode">Zipcode</label>
+            <input type="text" class="form-control" formControlName="zipcode" placeholder="Zipcode">
+          </div>
+          <div class="form-group">
+            <label for="avatar">Avatar</label>
+            <input type="text" class="form-control" formControlName="avatar" placeholder="Avatar">
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <input type="text" class="form-control" formControlName="gender" placeholder="Gender">
+          </div>
+          <button class="btn btn-info" type="submit">Update Info</button>
+        </form>
+      </div>
+
+      <div *ngSwitchCase="'addProduct'">
+        <h4>Add Product</h4>
+        <form [formGroup]="newForm4" (ngSubmit)="addProduct()">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" formControlName="title" placeholder="Title">
+          </div>
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" formControlName="price" placeholder="Price">
+          </div>
+          <div class="form-group">
+            <label for="stock">Stock</label>
+            <input type="text" class="form-control" formControlName="stock" placeholder="Stock">
+          </div>
+          <div class="form-group">
+            <label for="images">Images</label>
+            <input type="text" class="form-control" formControlName="images" placeholder="Images">
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" class="form-control" formControlName="category" placeholder="Category">
+          </div>
+          <div class="form-group">
+            <label for="warranty">Warranty</label>
+            <input type="number" class="form-control" formControlName="warranty" placeholder="Warranty">
+          </div>
+          <div class="form-group">
+            <label for="issueDate">Issue Date</label>
+            <input type="date" class="form-control" formControlName="issueDate" placeholder="Issue Date">
+          </div>
+          <div class="form-group">
+            <label for="thumbnail">Thumbnail</label>
+            <input type="text" class="form-control" formControlName="thumbnail" placeholder="Thumbnail">
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" formControlName="description" placeholder="Description">
+          </div>
+          <button class="btn btn-info" type="submit">Add Product</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

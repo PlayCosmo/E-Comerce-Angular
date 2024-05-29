@@ -1,0 +1,19 @@
+
+  
+
+<section class="sec">
+  <h1>Sign In</h1>
+  <form class="d-flex flex-column align-items-center">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <button type="button" class="btn btn-success" (click)="signIn()">Sign In</button>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,43 @@
+
+footer {
+    background-color: #45526e !important;
+  }
+  
+  footer h6 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  footer p {
+    margin-bottom: 0.5rem;
+  }
+  
+  footer a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
+  
+  footer .btn-floating {
+    background-color: #fff;
+    color: #45526e;
+  }
+  
+  footer .btn-floating:hover {
+    background-color: #fff;
+    color: #000;
+  }
+  
+
+  @media (max-width: 768px) {
+    footer {
+      text-align: center;
+    }
+  
+    footer .btn-floating {
+      margin: 0.5rem;
+    }
+  }

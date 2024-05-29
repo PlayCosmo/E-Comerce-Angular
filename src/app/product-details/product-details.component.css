@@ -1,0 +1,9 @@
+.pic
+{
+    border-radius: 10px;
+    box-shadow: 4px 4px 12px black;
+}
+img
+{
+    object-fit: contain;
+}

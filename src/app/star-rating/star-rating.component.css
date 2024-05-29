@@ -1,0 +1,24 @@
+.star-rating {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16px;
+}
+
+.star-rating i {
+  font-size: 24px;
+  color: gold;
+  cursor: pointer;
+}
+
+.star-rating i.selected {
+  color: darkgoldenrod;
+}
+
+input {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+button {
+  margin-right: 8px;
+}

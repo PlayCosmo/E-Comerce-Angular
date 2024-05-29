@@ -1,0 +1,56 @@
+<div *ngIf="getDetailInformation" class="container mt-5">
+  <h1 class="text-center fs-2 mb-3">{{getDetailInformation.title}}</h1>
+
+  <section class="d-flex gap-5 w-100">
+    <div class="pic w-50">
+      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item" *ngFor="let item of getDetailInformation.images; let i = index" [class.active]="i === 0">
+            <img [src]="item" class="d-block w-100" alt="..." style="width:400px; height:500px;">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="details-container w-50 d-flex flex-column justify-content-center align-items-center">
+      <h3 class="text-center">Brand: {{getDetailInformation.brand}}</h3>
+
+      <mat-tab-group>
+        <mat-tab label="Details">
+          <p class="w-75 text-center mt-3 mb-3 text-bg-primary">{{getDetailInformation.description}}</p>
+        </mat-tab>
+
+        <mat-tab label="Review">
+          <div class="review-form-container d-flex flex-column gap-3 mt-4 mb-4">
+            <h1>Evaluation</h1>
+              <h3>Name: {{name}}</h3>
+              <h3>Surname: {{surname}}</h3>
+              <h3>Rating: {{rating}}</h3>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+
+      <div class="additional-info-container d-flex justify-content-between align-items-center  mt-3">
+        <p class="p-2 border-right text-white">Left in Stock: {{getDetailInformation.stock}}</p>
+        <p class="p-2 border-right text-white">Warranty: {{getDetailInformation.warranty}} Year</p>
+        <p class="p-2 border-right text-white">Rating: {{getDetailInformation.rating}}</p>
+        <p class="p-2 text-white">Issue Date: {{getDetailInformation.issueDate | date}}</p>
+      </div>
+
+      <h3 class="text-center mt-4">Current Price: {{getDetailInformation.price.current | currency}}</h3>
+
+      <div class="buttons-container d-flex gap-3 mt-4">
+        <button class="btn btn-success">Add to Cart</button>
+        <button mat-raised-button (click)="openEvaluateModal()" class="btn btn-info">Evaluate</button>
+      </div>
+    </div>
+  </section>
+</div>
