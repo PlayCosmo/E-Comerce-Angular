@@ -4,7 +4,7 @@
   <div *ngFor="let item of cartDetals" class="card p-1 text-center bg-dark text-white mt-3 mb-3" style="width: 18rem;">
     <img [src]="item.thumbnail" width="300" height="250" class="card-img-top w-75 d-flex pt-1 rounded" style="margin:5px auto;" alt="{{item.title}}"/>
     <div class="card-body">
-      <h5 class="card-title bg-info p-2" style="cursor: pointer;">{{item.title}}</h5>
+      <h5 class="card-title bg-info p-2" style="cursor: pointer;" (click)="detailInfo(item._id)">{{item.title}}</h5>
     </div>
     <ul class="list-group list-group-light list-group-small">
       <li class="list-group-item px-4">Stock: {{item.stock}}</li>
@@ -23,6 +23,10 @@
   </div>
 </section>
 
-<section *ngIf="cartdetalslength === 0" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+<section *ngIf="boolean" class="d-flex justify-content-center align-items-center" style="height: 200px;">
   <h2 class="text-white">Your cart is empty</h2>
 </section>
+
+<div *ngIf="boolean1" class="w-100 d-flex justify-content-end me-5 mt-3 mb-3">
+  <button class="btn btn-success w-25 p-3 me-5" (click)="checkout()">Check Out</button>
+</div>

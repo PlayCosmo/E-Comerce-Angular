@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
+import { error } from 'node:console';
+import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-home',
@@ -131,25 +134,78 @@ OnPageChange(event:PageEvent) {
  }
  public userId:any
  public cart:any
+ public itemInfo:any
 
  postProduct(item:any) {
-
-  this.api.postCart({
+  this.api.cartAll().subscribe((data:any)=>{
+    if(data.products._id == item._id){
+      data.quantity++
+    this.api.patchCart({
     "id": item._id,
-    "quantity": 1
-  }).subscribe((data:any)=>{
-    console.log(data);
- 
+    "quantity": data.quantity
+  }).subscribe({
+    next:(data:any)=>{
+      this.cart = data
+      this.rout.navigate(["/cart"])
+    },
+    error:(error)=>{
+
+      
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "You Have To Create Cart First!",
+      });
+    }
   })
-  this.api.patchCart({
-    "id": item._id,
-    "quantity": 1
-  }).subscribe((data:any)=>{
-    // console.log(data);
-     this.cart = data
-     this.rout.navigate(["/cart"])
-  }) 
- 
- }
+  }else{
+    this.api.patchCart({
+      "id": item._id,
+      "quantity": 1
+    }).subscribe({
+      next:(data:any)=>{
+        this.cart = data
+        this.rout.navigate(["/cart"])
+      },
+      error:(error)=>{
+  
+        
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "You Have To Create Cart First!",
+        });
+      }
+    })
 
+  }})
+ 
+}
+ 
+ 
+public cartEngine:boolean = false
+ createCart() {
+  this.allItems.products.find((item:any)=>{
+    this.api.postCart({
+      "id": item._id,
+      "quantity": 1
+    }).subscribe({
+      next:(data:any)=>{
+        data
+        this.cartEngine = true
+      },
+      error: (error)=>{
+      
+        
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "You Have To Sing In First!",
+          footer: "Or You Already Create a Cart!",
+        });
+      }
+    })
+  })
+  
+}
 }

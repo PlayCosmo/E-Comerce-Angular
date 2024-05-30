@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -10,10 +10,16 @@ export class NavbarComponent implements OnInit {
 
   constructor(public api:ApiService){}
   ngOnInit(): void {
-
+this.takeInfo()
 
   }
 
 
+  public number:any = 0
+  takeInfo(){
+    this.api.cartLength.subscribe((data:any)=>{
+      this.number = data
+    })
+  }
 
 }

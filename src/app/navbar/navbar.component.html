@@ -1,5 +1,5 @@
 
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark animate__animated animate__slideInDown">
   <div class="container">
   
     <a class="navbar-brand" routerLink="/">
@@ -26,7 +26,10 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/cart">
-            <i class="fas fa-shopping-cart"></i> Cart
+            <div class="d-flex flex-column gap-1 align-items-center">
+            <div><i class="fas fa-shopping-cart"></i> Cart</div> 
+            <span class="text-danger" style="font-size: 18px;">{{this.number}}</span>
+          </div>
           </a>
         </li>
 

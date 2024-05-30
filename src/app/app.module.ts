@@ -66,7 +66,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTooltipModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+   
 
    
   ],
@@ -85,6 +86,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   ],
   
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { }
 

@@ -1,8 +1,9 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ApiService } from '../api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-product-details',
@@ -11,7 +12,7 @@ import { StarRatingComponent } from '../star-rating/star-rating.component';
 })
 export class ProductDetailsComponent implements OnInit, OnChanges {
 
-constructor(public api:ApiService, public rout:ActivatedRoute, private dialog: MatDialog){}
+constructor(public api:ApiService, public rout:ActivatedRoute, private dialog: MatDialog, public router:Router){}
   ngOnInit(): void {
   this.getIdFromitem()
     this.getDetails()
@@ -57,6 +58,28 @@ constructor(public api:ApiService, public rout:ActivatedRoute, private dialog: M
     })
     this.api.ratings.subscribe((data:any)=>{
       this.rating = data
+    })
+  }
+public cart:any;
+  postProduct(item:any) {
+  
+    this.api.patchCart({
+      "id": item._id,
+      "quantity": 1
+    }).subscribe({
+      next:(data:any)=>{
+        this.cart = data
+        this.router.navigate(["/cart"])
+      },
+      error:(error)=>{
+  
+        
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "You Have To Create Cart First!",
+        });
+      }
     })
   }
   

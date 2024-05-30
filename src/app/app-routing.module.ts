@@ -9,11 +9,12 @@ import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PersonalSpaceComponent } from './personal-space/personal-space.component';
 import { guardGuard } from './guard.guard';
+import { cartGuard } from './cart.guard';
 
 export const routes: Routes = [
   {path:"", component:HomeComponent},
   {path:"about", component:AboutusComponent},
-  {path:"cart", component:CartComponent, canActivate:[guardGuard]},
+  {path:"cart", component:CartComponent, canActivate:[cartGuard]},
   {path:"login", component:LoginComponent},
   {path:"details", component:ProductDetailsComponent},
   {path:"register", component:RegisterComponent},

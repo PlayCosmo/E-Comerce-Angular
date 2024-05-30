@@ -26,7 +26,9 @@ export class ApiService {
   public ratings:Subject<any> = new Subject()
 
   public tokenToGuard:Subject<any> = new Subject()
+  public cartLength:Subject<any> = new Subject()
 
+ 
 
   getAllProducts(){
     return this.http.get("https://api.everrest.educata.dev/shop/products/all?page_index=1&page_size=50")
@@ -115,6 +117,10 @@ clearAllCrt(){
 }
 deleteFromCrt(body:any){
   return this.http.delete("https://api.everrest.educata.dev/shop/cart/product", body)
+}
+
+checkOut(body:any){
+  return this.http.post("https://api.everrest.educata.dev/shop/cart/checkout",body)
 }
 }
 

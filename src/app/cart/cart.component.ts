@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ApiService } from '../api.service';
+import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -8,7 +10,7 @@ import { ApiService } from '../api.service';
 })
 export class CartComponent implements OnInit, AfterViewInit {
 
-  constructor(public api:ApiService){}
+  constructor(public api:ApiService, public rout:Router){}
 
   ngOnInit(): void {
     
@@ -19,6 +21,7 @@ export class CartComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.getAllProd()
 
+    
   }
 
   public cartAll:any;
@@ -26,6 +29,8 @@ export class CartComponent implements OnInit, AfterViewInit {
   public cartDetals!:any []
 
   public item:any;
+  public boolean:boolean = true
+  public boolean1:boolean = false
 
   getAllProd(){
       let cart=[]
@@ -33,6 +38,7 @@ export class CartComponent implements OnInit, AfterViewInit {
       console.log("main", data);
       
       this.cartAll = data.products
+      this.cartAll.splice(0,1)
       console.log(this.cartAll);
       this.cartAll.forEach((item:any)=>{
         console.log("333", item.productId);
@@ -45,12 +51,21 @@ export class CartComponent implements OnInit, AfterViewInit {
             this.cartDetals = cart
           }
         })
+        if( this.cartAll.length > 0){
+          this.boolean = false
+          this.boolean1 = true
+        }else{
+          this.boolean = true
+          this.boolean1 = false
+         
+        }
+        this.api.cartLength.next(this.cartAll.length)
       })
-    
-      this.cartdetalslength = this.cartDetals.length
-      console.log(this.cartdetalslength);
-      
+
      })
+ 
+   
+    
   }
 
 
@@ -68,6 +83,7 @@ export class CartComponent implements OnInit, AfterViewInit {
 
   clearAll(){
     this.api.clearAllCrt().subscribe()
+  
   }
 
     public user:any
@@ -76,22 +92,51 @@ export class CartComponent implements OnInit, AfterViewInit {
     
     this.api.deleteFromCrt({
       "id": item._id
-      
-      
-    }).subscribe((data:any)=>{
-      
-   
-      
+    }).subscribe((data:any)=>{ 
+    console.log(data);
     })
-
   }
 
-  public cartdetalslength!:number;
+  checkout(){
+    this.api.checkOut({}).subscribe({
+      next:(data:any)=>{
+        console.log(data);
+       
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: data.message,
+          showConfirmButton: false,
+          timer: 5000
+        });
+ 
+      },
+      error:()=>{
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Product_stock_sold_before_checkout",
+          
+        });
+      }
+    })
+  
+    this.rout.navigate(["/"])
+  }
+
+ 
   getCart(){
     console.log("123");
     
 
     
   }
+
+  detailInfo(id: any) {
+    this.api.sendId.next(id)
+  
+    this.rout.navigate(["/details"])
+  
+   }
 
 }

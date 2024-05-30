@@ -48,7 +48,7 @@
       <h3 class="text-center mt-4">Current Price: {{getDetailInformation.price.current | currency}}</h3>
 
       <div class="buttons-container d-flex gap-3 mt-4">
-        <button class="btn btn-success">Add to Cart</button>
+        <button class="btn btn-success" (click)="postProduct(getDetailInformation)">Add to Cart</button>
         <button mat-raised-button (click)="openEvaluateModal()" class="btn btn-info">Evaluate</button>
       </div>
     </div>
