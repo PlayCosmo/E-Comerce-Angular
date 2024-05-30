@@ -64,7 +64,7 @@ h1 {
   border-radius: 10px;
 }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .container {
       width: 100% !important;
     }
@@ -75,5 +75,13 @@ h1 {
   
     .btn {
       width: 100% !important;
+    }
+    .d-flex{
+      flex-wrap: wrap;
+    }
+  }
+  @media (max-width: 1024px) {
+    .d-flex{
+      flex-wrap: wrap;
     }
   }

@@ -24,6 +24,11 @@ constructor(public api:ApiService, public rout:ActivatedRoute, private dialog: M
 
   public getid:any;
   public getDetailInformation:any
+  public name!:string;
+  public surname!:string;
+  public rating!:number;
+  public cart:any;
+
   getIdFromitem(){
     this.api.sendId.subscribe((data:any)=>{
       this.getid = data
@@ -45,9 +50,7 @@ constructor(public api:ApiService, public rout:ActivatedRoute, private dialog: M
     });
   }
 
-  public name!:string;
-  public surname!:string;
-  public rating!:number;
+
 
   takeInfo(){
     this.api.name.subscribe((data:any)=>{
@@ -60,7 +63,7 @@ constructor(public api:ApiService, public rout:ActivatedRoute, private dialog: M
       this.rating = data
     })
   }
-public cart:any;
+
   postProduct(item:any) {
   
     this.api.patchCart({

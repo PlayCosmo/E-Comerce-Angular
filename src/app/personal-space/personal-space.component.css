@@ -14,3 +14,24 @@
   .btn-danger {
     margin-top: 20px;
   }
+  @media (max-width: 767px) {
+    .container {
+      width: 100% !important;
+    }
+  
+    .card {
+      width: 100% !important;
+    }
+  
+    .btn {
+      width: 100% !important;
+    }
+    .d-flex{
+      flex-wrap: wrap;
+    }
+  }
+  @media (max-width: 1024px) {
+    .d-flex{
+      flex-wrap: wrap;
+    }
+  }
